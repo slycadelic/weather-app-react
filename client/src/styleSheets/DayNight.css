@@ -1,0 +1,78 @@
+:root {
+    --arc-diameter: 180px;
+}
+
+/* horizon made using border-bottom */
+.sun-times {
+    position: relative;
+    /* margin-top: 10px; */
+    width: var(--arc-diameter);
+    max-height: calc(var(--arc-diameter)*0.5);
+    border-bottom: 1px solid rgb(2, 44, 78);
+    overflow: hidden;
+    background-color: transparent;
+}
+
+/* sun/moon path using border-radius 50%  (circle) and overflow hidden*/
+/* set sky background color*/
+.sun-path {
+    width: var(--arc-diameter);
+    height: var(--arc-diameter);
+    overflow: hidden;
+    border: 1px dashed rgb(0, 0, 0);
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    background-color: #71b8ae;
+}
+
+.sun-symbol-path {
+    position: absolute;
+    text-shadow: 0 0 5px rgb(0, 0, 0);
+    height: calc(var(--arc-diameter)/2);
+    left: calc((var(--arc-diameter) / 2) - 5px);
+    bottom: 0;
+    transition: transform 2s linear;
+    transform-origin: 50% 100%;
+    transform: rotateZ(-88deg);
+    -webkit-transition: transform 2s linear;
+    -moz-transition: transform 2s linear;
+    -ms-transition: transform 2s linear;
+    -o-transition: transform 2s linear;
+    -webkit-transform: rotateZ(-88deg);
+    -moz-transform: rotateZ(-88deg);
+    -ms-transform: rotateZ(-88deg);
+    -o-transform: rotateZ(-88deg);
+}
+
+/* set background color of sky behind symbol position*/
+.sun-animation {
+    width: 0%;
+    height: calc(var(--arc-diameter)/1.2);
+    background-color: rgba(255, 255, 0, 0.4);
+    transition: width 2s linear;
+    transition-delay: 2.5s;
+    -webkit-transition: width 2s linear;
+    -moz-transition: width 2s linear;
+    -ms-transition: width 2s linear;
+    -o-transition: width 2s linear;
+}
+
+.symbol {
+    position: relative;
+    top: -4px
+}
+
+.Sun {
+    color: yellow;
+    
+}
+.Moon {
+    color: white;
+}
+
+.legend {
+    word-spacing: 120px;
+}
