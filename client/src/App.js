@@ -1,32 +1,48 @@
-import './styleSheets/App.css';
-import './styleSheets/CompStyles.css';
-import './styleSheets/DayNight.css';
-import { SearchBox } from './components/SearchBox';
-import { LocationBox } from './components/LocationBox';
-import { WeatherBox } from './components/WeatherBox';
-import { DateBuilder } from './components/DateBuilder';
-import { WeatherContextProvider } from './context/WeatherContext';
-import ThemeSwitch from './components/ThemeSwitch';
-import Header from './components/Header';
+import { Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import Register from './components/Register';
+import Login from './components/Login';
+import Home from './components/Home';
+import Admin from './components/Admin';
+import Missing from './components/Missing';
+import Unauthorized from './components/Unauthorized';
+import LinkPage from './components/LinkPage';
+import RequireAuth from './components/RequireAuth';
+import PersistLogin from './components/PersistLogin';
 
+const ROLES = {
+    'User': 1,
+    'Admin': 2
+}
 
 function App() {
 
     return (
-        <>
-            <ThemeSwitch preserveRasters/>
-            <Header />
-            <div className='App'>
-                <WeatherContextProvider>
-                    <SearchBox />
-                        <>
-                            <LocationBox />
-                            <DateBuilder/>
-                            <WeatherBox />
-                        </>
-                </WeatherContextProvider>
-            </div>
-        </>
+        <Routes>
+            <Route path="/" element={<Layout />}>
+
+                {/* public routes */}
+                <Route path="login" element={<Login />} />
+                <Route path="register" element={<Register />} />
+                <Route path="linkpage" element={<LinkPage />} />
+                <Route path="unauthorized" element={<Unauthorized />} />
+
+                {/* we want to protect these routes */}
+                <Route element={<PersistLogin />}>
+                    <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
+                        <Route path="/" element={<Home />} />
+                    </Route>
+
+                    <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+                        <Route path="admin" element={<Admin />} />
+                    </Route>
+
+                </Route>
+
+                {/* catch all */}
+                <Route path="*" element={<Missing />} />
+            </Route>
+        </Routes>
     );
 }
 
