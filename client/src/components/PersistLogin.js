@@ -50,11 +50,11 @@ const PersistLogin = () => {
     // useEffect hook to run anytime isLoading state changes.
     // Logs isLoading state and auth token so we can see what is going on
     // can remove later
-    useEffect(() => {
-        console.log(`isLoading: ${isLoading}`)
-        console.log(`aT: ${JSON.stringify(auth?.accessToken)}`)
-        // eslint-disable-next-line
-    }, [isLoading])
+    // useEffect(() => {
+    //     console.log(`isLoading: ${isLoading}`)
+    //     console.log(`aT: ${JSON.stringify(auth?.accessToken)}`)
+    //     // eslint-disable-next-line
+    // }, [isLoading])
 
     // return JSX that checks isLoading status and returns text if true 
     // or returns Outlet component otherwise (imported from react-router-dom)

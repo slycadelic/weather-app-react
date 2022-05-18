@@ -4,9 +4,11 @@ import './styleSheets/index.css';
 import './styleSheets/App.css';
 import './styleSheets/CompStyles.css';
 import './styleSheets/DayNight.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import { AuthProvider } from './context/AuthProvider';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import NavBar from './components/NavBar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

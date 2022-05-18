@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
-import { WeatherContext } from '../context/WeatherContext';
-import useFirstRender from '../hooks/useFirstRender';
+import { WeatherContext } from '../../context/WeatherContext';
+import useFirstRender from '../../hooks/useFirstRender';
 import axios from 'axios';
 
 // const base = "https://api.openweathermap.org/data/2.5/weather?q=";

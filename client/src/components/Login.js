@@ -32,6 +32,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        // console.log(user, pwd);
 
         try {
             const response = await axios.post(LOGIN_URL,
@@ -41,12 +42,10 @@ const Login = () => {
                     withCredentials: true
                 }
             );
-            console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
+            // console.log(JSON.stringify(response?.data));
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
             setAuth({ user, pwd, roles, accessToken });
-            //setUser('');
             setPwd('');
             resetUser();
             navigate(from, { replace: true });
@@ -73,13 +72,13 @@ const Login = () => {
     // }, [persist])
 
     return (
-
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Sign In</h1>
-            <form onSubmit={handleSubmit}>
+            <h2>Sign In</h2>
+            <form onSubmit={handleSubmit} className='loginForm'>
                 <label htmlFor="username">Username:</label>
                 <input
+                    className='loginInput'
                     type="text"
                     id="username"
                     ref={userRef}
@@ -89,16 +88,16 @@ const Login = () => {
                     {...userAttribs}
                     required
                 />
-
                 <label htmlFor="password">Password:</label>
                 <input
+                    className='loginInput'
                     type="password"
                     id="password"
                     onChange={(e) => setPwd(e.target.value)}
                     value={pwd}
                     required
                 />
-                <button>Sign In</button>
+                <button className="signInButton">Sign In</button>
                 <div className="persistCheck">
                     <input
                         type="checkbox"
@@ -116,7 +115,6 @@ const Login = () => {
                 </span>
             </p>
         </section>
-
     )
 }
 

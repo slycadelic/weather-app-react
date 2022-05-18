@@ -4,9 +4,10 @@
   "description": "Weather App",
   "main": "server.js",
   "scripts": {
-    "client": "npm run start --prefix client",
-    "start-server": "nodemon server",
-    "dev": "concurrently -k \"nodemon server\" \"npm run client\""
+    "client": "npm start --prefix client",
+    "start": "node server",
+    "dev": "nodemon server",
+    "both": "concurrently \"npm run start\" \"npm run client\" "
   },
   "repository": {
     "type": "git",

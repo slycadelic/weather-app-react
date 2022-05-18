@@ -1,8 +1,9 @@
 import { useContext } from 'react';
-import { WeatherContext } from '../context/WeatherContext';
-import useFirstRender from '../hooks/useFirstRender';
+import { WeatherContext } from '../../context/WeatherContext';
+import useFirstRender from '../../hooks/useFirstRender';
 import { motion } from 'framer-motion';
 import WeatherIcon from './WeatherIcon';
+import AudioPlayer from './AudioPlayer';
 
 export const WeatherBox = () => {
 
@@ -16,6 +17,7 @@ export const WeatherBox = () => {
         <>
             {(renderCount) ? (
                 (typeof weather !== 'undefined') ? (
+                    <>
                     <motion.div
                         className="container weather"
                         initial={{ opacity: 0 }}
@@ -31,6 +33,7 @@ export const WeatherBox = () => {
                                 {`${weather.weather[0].description}`}
                             </div>
                         </div>
+                        <hr />
                         <div className="row">
                             <div className="column">
                                 Avg Temp<br />{`${weather.main.temp}`} °C
@@ -39,6 +42,7 @@ export const WeatherBox = () => {
                                 Feels Like<br />{`${weather.main.feels_like}`} °C
                             </div>
                         </div>
+                        <hr />
                         <div className="row">
                             <div className="column">
                                 Max Temp<br />{`${weather.main.temp_max}`} °C
@@ -47,6 +51,7 @@ export const WeatherBox = () => {
                                 Min Temp<br />{`${weather.main.temp_min}`} °C
                             </div>
                         </div>
+                        <hr />
                         <div className="row">
                             <div className="column">
                                 Wind Speed<br />{`${weather.wind.speed}`} m/s
@@ -55,7 +60,8 @@ export const WeatherBox = () => {
                                 Wind Direction<br />{`${weather.wind.deg}`}°
                             </div>
                         </div>
-                        <div className="lastrow">
+                        <hr />
+                        <div className="row">
                             <div className="column">
                                 Humidity<br />{`${weather.main.humidity}`} %
                             </div>
@@ -65,6 +71,8 @@ export const WeatherBox = () => {
                         </div>
 
                     </motion.div>
+                    <AudioPlayer />
+                    </>
                 ) : ('')
             ) : ('')}
         </>

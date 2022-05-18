@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { WeatherContext } from '../context/WeatherContext';
-import useFirstRender from '../hooks/useFirstRender';
+import { WeatherContext } from '../../context/WeatherContext';
+import useFirstRender from '../../hooks/useFirstRender';
 import DayNight from './DayNight';
 import { motion } from 'framer-motion';
 // import SlideToggleContent from './SlideToggleContent';
@@ -60,6 +60,7 @@ export const DateBuilder = () => {
                                 {isVisible ? "-" : "+"}
                             </button> */}
                         </div>
+                        <hr />
                         <div className="row">
                             <div className="column">
                                 Timezone<br />{`${times.timezone}`}
@@ -69,6 +70,7 @@ export const DateBuilder = () => {
 
                             </div>
                         </div>
+                        <hr />
                         <div className="row">
                             <div className="column">
                                 Sunrise<br />{`${times.sunriseTime}`}
@@ -77,7 +79,8 @@ export const DateBuilder = () => {
                                 Sunset<br />{`${times.sunsetTime}`}
                             </div>
                         </div>
-                        <div className="lastrow">
+                        <hr />
+                        <div className="row">
                             <div className="double-column">
                                 <DayNight />
                             </div>

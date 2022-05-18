@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import BadRequest from './BadRequest';
-import { WeatherContext } from '../context/WeatherContext';
-import useFirstRender from '../hooks/useFirstRender';
+import { WeatherContext } from '../../context/WeatherContext';
+import useFirstRender from '../../hooks/useFirstRender';
 import { motion } from 'framer-motion';
 
 export const LocationBox = () => {

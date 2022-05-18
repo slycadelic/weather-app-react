@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Users from './Users';
 
 const Admin = () => {
@@ -8,9 +7,6 @@ const Admin = () => {
             <br />
             <Users />
             <br />
-            <div className="flexGrow">
-                <Link to="/">Home</Link>
-            </div>
         </section>
     )
 }
