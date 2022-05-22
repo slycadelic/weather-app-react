@@ -222,3 +222,8 @@ hr {
 .userProfile {
     color: var(--defaultColor);
 }
+
+.rounded-circle{
+    width: 35px;
+    height: 35px;
+}
