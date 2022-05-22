@@ -1,18 +1,20 @@
 import { useContext } from 'react';
 import BadRequest from './BadRequest';
-import { WeatherContext } from '../context/WeatherContext';
-import useFirstRender from '../hooks/useFirstRender';
+import { WeatherContext } from '../../context/WeatherContext';
+import useFirstRender from '../../hooks/useFirstRender';
+import useIsEmpty from '../../hooks/useIsEmpty';
 import { motion } from 'framer-motion';
 
 export const LocationBox = () => {
 
     const { weather } = useContext(WeatherContext);
     const renderCount = useFirstRender();
-
+    const empty = useIsEmpty(weather);
+    // console.log(weather, empty);
     return (
         <>
             {(renderCount) ? (
-                (typeof weather !== 'undefined') ? (
+                (!empty && typeof weather !== 'undefined') ? (
                     <motion.div
                         className="location container"
                         initial={{ opacity: 0 }}
