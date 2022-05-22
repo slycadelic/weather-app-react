@@ -1,6 +1,7 @@
 import useLocalStorage from "./useLocalStorage";
 
 const useToggle = (key, initValue) => {
+    
     const [value, setValue] = useLocalStorage(key, initValue);
 
     const toggle = (value) => {
@@ -8,7 +9,6 @@ const useToggle = (key, initValue) => {
             return typeof value === 'boolean' ? value : !prev;
         })
     }
-
     return [value, toggle];
 }
 

@@ -63,14 +63,6 @@ const Login = () => {
         }
     }
 
-    // const togglePersist = () => {
-    //     setPersist(prev => !prev);
-    // }
-
-    // useEffect(() => {
-    //     localStorage.setItem("persist", persist);
-    // }, [persist])
-
     return (
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
@@ -83,8 +75,6 @@ const Login = () => {
                     id="username"
                     ref={userRef}
                     autoComplete="off"
-                    // onChange={(e) => setUser(e.target.value)}
-                    // value={user}
                     {...userAttribs}
                     required
                 />

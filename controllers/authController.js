@@ -43,28 +43,14 @@ const handleLogin = async (req, res) => {
             { expiresIn: '1d' } 
         );
 
-        // Saving refreshToken with current user in DB (to delete their refresh token when logout)
-        // First create a array of users except the current user
-        // const otherUsers = usersDB.users.filter(person => person.username !== foundUser.username);
-        // // Then create current user with the user and its refresh token
-        // const currentUser = { ...foundUser, refreshToken };
-        // // Then add current user (with refresh token) with all other users in DB and 
-        // // write the userDB to json file 
-        // usersDB.setUsers([...otherUsers, currentUser]);
-        // await fsPromises.writeFile(
-        //     path.join(__dirname, '..', 'model', 'users.json'),
-        //     JSON.stringify(usersDB.users)
-        // );
         foundUser.refreshToken = refreshToken;
         const result = await foundUser.save();
-        // console.log(result);
 
         // Send token as httpOnly cookie so that it is not available to JavaScript and set
         // its expiry 
         // secure: true
         res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24*60*60*1000 });
         // Send accessToken as json
-        // res.json({ accessToken });
         res.json({ roles, accessToken });
 
     } else {

@@ -1,26 +1,62 @@
-import { useContext } from 'react';
-import useAudio from '../../hooks/useAudio';
+import { useEffect, useContext } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faVolumeHigh, faVolumeXmark } from "@fortawesome/free-solid-svg-icons";
+import { WeatherContext } from '../../context/WeatherContext';
 import Rain from '../../assets/Sounds/Rain.mp3';
 import Sun from '../../assets/Sounds/NotRain.mp3';
 import Wind from '../../assets/Sounds/Wind.mp3';
 import Thunder from '../../assets/Sounds/Thunder.mp3';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVolumeHigh, faVolumeXmark } from "@fortawesome/free-solid-svg-icons";
-import { WeatherContext } from '../../context/WeatherContext';
 
 const AudioPlayer = () => {
 
-    const { weather } = useContext(WeatherContext);
-    const Id = weather.weather[0].id;
-    // console.log(Id); 
-    // https://openweathermap.org/weather-conditions
-    let URL;
-    if (Id < 300) {URL = Thunder}
-    else if (Id < 700) {URL = Rain}
-    else if (Id < 800) {URL = Wind}
-    else {URL = Sun}
+    const { weather, audio, setAudio, playing, setPlaying } = useContext(WeatherContext);
 
-    const [playing, toggle] = useAudio(URL);
+    useEffect(() => {
+
+        let Url;
+
+        if (weather !== null && typeof weather !== 'undefined') {
+            const Id = weather.weather[0].id;
+
+            if (Id < 300) { Url = Thunder }
+            else if (Id < 700) { Url = Rain }
+            else if (Id < 800) { Url = Wind }
+            else { Url = Sun }
+            const audio = new Audio(Url);
+            setAudio(audio);
+        }
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [weather]);
+
+
+    const toggle = () => {
+        setPlaying(!playing);
+        audio.addEventListener('ended', () => setPlaying(false));
+        return () => {
+            audio.removeEventListener('ended', () => setPlaying(false));
+        };
+    }
+
+    useEffect(() => {
+
+        if (weather !== null && typeof weather !== 'undefined' && typeof audio !== 'undefined') {
+            playing
+                ? audio.play()
+                : audio.pause()
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [playing, audio]);
+
+    useEffect(() => {
+        if (weather !== null && typeof weather !== 'undefined' && typeof audio !== 'undefined') {
+            audio.addEventListener('ended', () => setPlaying(false));
+            return () => {
+                audio.removeEventListener('ended', () => setPlaying(false));
+            };
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div>

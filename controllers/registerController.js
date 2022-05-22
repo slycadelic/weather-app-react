@@ -1,15 +1,4 @@
-// Create usersDb object with users model and setUsers method to add new users
-// Similar to useState 
-// const usersDB = {
-//     users: require('../model/users.json'),
-//     setUsers: function (data) { this.users = data }
-// }
 const User = require('../model/User');
-
-
-// Required packages
-// const fsPromises = require('fs').promises;
-// const path = require('path');
 const bcrypt = require('bcrypt');
 
 // Handler for new user registration
@@ -21,7 +10,6 @@ const handleNewUser = async (req, res) => {
     if (!user || !pwd) return res.status(400).json({ 'message': 'Username and password are required.' });
     
     // check for duplicate usernames in the db and send conflict if duplicate
-    // const duplicate = usersDB.users.find(person => person.username === user);
     const duplicate = await User.findOne({ username: user }).exec();
     if (duplicate) return res.sendStatus(409); //Conflict 
     
@@ -36,8 +24,6 @@ const handleNewUser = async (req, res) => {
             // "roles": { "User": 2001 }, // assigned by default in DB
             "password": hashedPwd
         });
-        
-        // console.log(result);
              
         res.status(201).json({ 'success': `New user ${user} created!` });
         

@@ -22,19 +22,8 @@ const handleLogout = async (req, res) => {
     }
     
     // Delete the refreshToken in DB 
-    // Get other users (apart from the one logged in)
-    // const otherUsers = usersDB.users.filter(person => person.refreshToken !== foundUser.refreshToken);
-    // // create current user and set its refreshToken to blank
-    // const currentUser = {...foundUser, refreshToken: ''};
-    // // Update DB with the users and the current user (with no refresh token) and write to file
-    // usersDB.setUsers([...otherUsers, currentUser]);
-    // await fsPromises.writeFile(
-    //     path.join(__dirname, '..', 'model', 'users.json'),
-    //     JSON.stringify(usersDB.users)
-    // );
     foundUser.refreshToken = '';
     const result = await foundUser.save();
-    // console.log(result);
 
     // Delete the cookie 
     res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });

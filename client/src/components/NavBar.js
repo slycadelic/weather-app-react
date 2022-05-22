@@ -14,7 +14,6 @@ const NavBar = () => {
 
     const { auth } = useAuth();
     const username = JSON.parse(localStorage.getItem('user'));
-    // console.log(auth?.roles?.[1]);
 
     const navigate = useNavigate();
 
@@ -24,7 +23,6 @@ const NavBar = () => {
         await logout();
         navigate('/');
     }
-
     //<button onClick={signOut}>Sign Out </button>
 
     return (

@@ -14,8 +14,6 @@ const verifyRoles = (...allowedRoles) => {
 
         // store all allowed Roles in an array using the spread operator
         const rolesArray = [...allowedRoles];
-        // console.log(rolesArray);
-        // console.log(req.roles);
 
         // Map over the roles sent from the JWT in the req. The roles are assigned to 
         // the req in the verifyJWT middleware. 

@@ -1,48 +1,20 @@
 import { useContext } from 'react';
 import { WeatherContext } from '../../context/WeatherContext';
 import useFirstRender from '../../hooks/useFirstRender';
+import useIsEmpty from '../../hooks/useIsEmpty';
 import DayNight from './DayNight';
 import { motion } from 'framer-motion';
-// import SlideToggleContent from './SlideToggleContent';
 
 export const DateBuilder = () => {
 
     const renderCount = useFirstRender();
     const { weather, times } = useContext(WeatherContext);
-
-    // useEffect(() => {
-    //     if (!renderCount || typeof weather === 'undefined') return;
-    //     const exp = document.querySelector('.expandable');
-    //     if(exp === null) return;
-    //     // console.log(exp);
-    //     console.log(isActive);
-    //     if (!isActive) {
-    //         // exp.style.setProperty('height:', '50px');
-    //         exp.style.setProperty('overflow', 'visible');
-    //         // exp.style.setProperty('height:', 'auto');
-    //         // console.log(exp);
-    //     } else {
-    //         // exp.style.setProperty('height:', '0px');
-    //         exp.style.setProperty('overflow', 'hidden');
-    //         // exp.style.setProperty('height:', '0px');
-    //         // console.log(exp);
-    //     }
-
-    // },[isActive])
-
-    // const toggleExp = (sign) => {
-    //     console.log('here is toggle');
-    //     setActive(!isActive);
-    //   };
-    // className={isActive ? 'expandable': 'expandable1'
-
-
-    // const [isVisible, setIsVisible] = useState(false);
+    const empty = useIsEmpty(weather);
 
     return (
         <>
             {(renderCount) ? (
-                (typeof weather.main != 'undefined') ? (
+                (!empty && typeof weather !== 'undefined') ? (
                     <motion.div
                         className="Date container"
                         initial={{ opacity: 0 }}
@@ -56,9 +28,6 @@ export const DateBuilder = () => {
                             <div className=" column">
                                 Local Time<br />{`${times.localTime}`}
                             </div>
-                            {/* <button type="button" onClick={() => setIsVisible(!isVisible)}>
-                                {isVisible ? "-" : "+"}
-                            </button> */}
                         </div>
                         <hr />
                         <div className="row">
@@ -90,5 +59,4 @@ export const DateBuilder = () => {
             ) : ('')}
         </>
     )
-
 }

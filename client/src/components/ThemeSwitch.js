@@ -10,7 +10,6 @@ class ThemeSwitch extends Component {
       html { filter: invert(100%); background: #fefefe; }
       * { background-color: inherit }
     `
-
         // Add custom css identifiers here for whom it should not invert
         if (this.props.preserveRasters) {
             this.css +=

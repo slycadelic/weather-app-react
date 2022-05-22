@@ -1,11 +1,9 @@
 import { useContext, useEffect } from 'react';
 import { WeatherContext } from '../../context/WeatherContext';
-// import useFirstRender from '../hooks/useFirstRender';
 
 const DayNight = () => {
 
     const { times } = useContext(WeatherContext);
-    // const renderCount = useFirstRender();
 
     let labels = (times.dayNight) ?
         ['☀', times.sunriseTime.replace(' ', ''), times.sunsetTime.replace(' ', '')]
@@ -43,8 +41,8 @@ const DayNight = () => {
             sunAnimation.style.setProperty('width', percent);
             sunPath.style.setProperty('transform', rotateZ);
 
-
         } else {
+            
             let hours1 = (hours <= hoursSunrise) ? hours + 24: hours;
             let percentVal = (((hours1-hoursSunset)/(24-duration))*100);
             let percent = (percentVal).toString().concat('%');

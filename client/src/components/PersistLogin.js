@@ -17,13 +17,11 @@ const PersistLogin = () => {
     // when component loads
     useEffect(() => {
 
-
         let isMounted = true;
 
         // function to try to refresh access token using refresh token,
         // catch any errors in case can't refresh access token
         // finally (always runs regardless of result) set isLoading to false
-
         const verifyRefreshToken = async () => {
             try {
                 await refresh();
@@ -46,15 +44,6 @@ const PersistLogin = () => {
         return () => isMounted = false;
         // eslint-disable-next-line
     }, [])
-
-    // useEffect hook to run anytime isLoading state changes.
-    // Logs isLoading state and auth token so we can see what is going on
-    // can remove later
-    // useEffect(() => {
-    //     console.log(`isLoading: ${isLoading}`)
-    //     console.log(`aT: ${JSON.stringify(auth?.accessToken)}`)
-    //     // eslint-disable-next-line
-    // }, [isLoading])
 
     // return JSX that checks isLoading status and returns text if true 
     // or returns Outlet component otherwise (imported from react-router-dom)
