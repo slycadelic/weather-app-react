@@ -6,11 +6,11 @@ import Home from './components/Home';
 import Admin from './components/Admin';
 import Missing from './components/Missing';
 import Unauthorized from './components/Unauthorized';
-// import LinkPage from './components/LinkPage';
 import RequireAuth from './components/RequireAuth';
 import PersistLogin from './components/PersistLogin';
 import WeatherApp from './components/WeatherApp';
 import NavBar from './components/NavBar';
+
 
 const ROLES = {
     'User': 1,

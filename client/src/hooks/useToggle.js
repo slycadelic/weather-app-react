@@ -4,12 +4,12 @@ const useToggle = (key, initValue) => {
     
     const [value, setValue] = useLocalStorage(key, initValue);
 
-    const toggle = (value) => {
+    const toggler = (value) => {
         setValue(prev => {
             return typeof value === 'boolean' ? value : !prev;
         })
     }
-    return [value, toggle];
+    return [value, toggler];
 }
 
 export default useToggle

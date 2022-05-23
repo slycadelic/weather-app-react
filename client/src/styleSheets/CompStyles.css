@@ -2,8 +2,9 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    width: 36px;
+    height: 20px;
+    margin: 15px 30px;
 }
 
 /* Hide default HTML checkbox */
@@ -29,8 +30,8 @@
 .slider:before {
     position: absolute;
     content: "";
-    height: 40px;
-    width: 40px;
+    height: 29px;
+    width: 29px;
     left: 0px;
     bottom: 4px;
     top: 0;
@@ -39,7 +40,7 @@
     -webkit-transition: 0.4s;
     transition: 0.4s;
     box-shadow: 0 0px 15px #2020203d;
-    background: white url('https://i.ibb.co/FxzBYR9/night.png');
+    background: rgb(0, 0, 0) url('https://i.ibb.co/FxzBYR9/night.png');
     background-repeat: no-repeat;
     background-position: center;
 }
@@ -53,12 +54,14 @@ input:focus+.slider {
 }
 
 input:checked+.slider:before {
-    -webkit-transform: translateX(24px);
-    -ms-transform: translateX(24px);
-    transform: translateX(24px);
-    background: white url('https://i.ibb.co/7JfqXxB/sunny.png');
+    background: rgb(255, 255, 255) url('https://i.ibb.co/7JfqXxB/sunny.png');
     background-repeat: no-repeat;
     background-position: center;
+    transform: translateX(10px);
+    -webkit-transform: translateX(10px);
+    -moz-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    -o-transform: translateX(10px);
 }
 
 /* Rounded sliders for theme switch */

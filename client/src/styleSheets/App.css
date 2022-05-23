@@ -222,3 +222,14 @@ hr {
 .userProfile {
     color: var(--defaultColor);
 }
+
+.rounded-circle{
+    width: 35px;
+    height: 35px;
+}
+
+.nav-link.active {
+    color: rgb(19, 7, 7) !important;
+    font-weight: bold;
+    background: rgb(196, 114, 20) !important;
+  }
