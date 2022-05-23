@@ -12,13 +12,13 @@ import useLogout from "../hooks/useLogout";
 
 
 
-const NavBar = () => {
+const NavBar = (props) => {
 
     const { auth } = useAuth();
     const username = JSON.parse(localStorage.getItem('user'));
 
     const location = useLocation();
-    // console.log(location, location.pathname);
+    console.log(props);
 
 
     const navigate = useNavigate();
@@ -76,7 +76,7 @@ const NavBar = () => {
                     )
                 }
             </Container>
-            <ThemeSwitch />
+            <ThemeSwitch preserveRasters/>
         </Navbar>
     )
 }

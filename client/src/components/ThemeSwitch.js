@@ -1,84 +1,60 @@
-import React, { Component } from 'react'
+import React, { useRef, useEffect, useState } from 'react';
 
-// theme switching component outside the main weather app component
-// taken from npm ThemeSwitch
-class ThemeSwitch extends Component {
-    constructor(props) {
-        super(props)
+// https://www.npmjs.com/package/react-theme-switch
+const ThemeSwitch = ({ preserveRasters = true, storeKey = 'ThemeSwitch' }) => {
+    const cssString = `
+        html { filter: invert(100%); background: #fefefe; }
+        * { background-color: inherit }
+      `;
+    const rasterCss =
+        'img:not([src*=".svg"]), video, [style*="url("], .sun-times, .flag, .slider { filter: invert(100%) }';
 
-        this.css = `
-      html { filter: invert(100%); background: #fefefe; }
-      * { background-color: inherit }
-    `
-        // Add custom css identifiers here for whom it should not invert
-        if (this.props.preserveRasters) {
-            this.css +=
-                'img:not([src*=".svg"]), video, [style*="url("], .sun-times, .flag { filter: invert(100%) }'
-        }
-
-        this.state = {
-            active: 'false'
-        }
-
-        this.toggle = this.toggle.bind(this)
-    }
-
-    isDeclarationSupported(property, value) {
-        var prop = property + ':',
+    const isDeclarationSupported = (property, value) => {
+        const prop = property + ':',
             el = document.createElement('test'),
             mStyle = el.style;
         el.style.cssText = prop + value;
         return mStyle[property];
-    }
+    };
 
-    toggle() {
-        this.setState(
-            {
-                active: !this.state.active
-            },
-            () => {
-                localStorage.setItem(this.props.storeKey, this.state.active)
-            }
-        )
-    }
+    const supported = useRef(!!isDeclarationSupported('filter', 'invert(100%)'));
 
-    componentDidMount() {
-        this.supported = this.isDeclarationSupported('filter', 'invert(100%)');
-        this.setState({
-            active: localStorage.getItem(this.props.storeKey) === 'true'
-        })
-    }
+    const [css, setCss] = useState(cssString);
+    const [active, setActive] = useState(
+        localStorage.getItem(storeKey) === 'true' || (!localStorage.getItem(storeKey) && matchMedia('(prefers-color-scheme: dark)').matches)
+    );
 
-    render() {
-        if (!this.supported) {
-            return null;
+    useEffect(() => {
+        if (preserveRasters) {
+            setCss(`${cssString} ${rasterCss}`);
         }
+        return () => {
+            setCss(cssString);
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [preserveRasters]);
 
-        const { active } = this.state
+    useEffect(() => {
+        localStorage.setItem(storeKey, active);
+    }, [active, storeKey]);
 
-        // Code from original ThemeSwitch
-        //  <button className="ThemeSwitch" aria-pressed={this.state.active} onClick={this.toggle}>
-        //     {/* Inverted theme:{' '} */}
-        //     <span aria-hidden='true'>{this.state.active ? 'Light' : 'Dark'}</span>
-        //  </button> 
+    const toggle = () => {
+        setActive(a => !a);
+    };
 
-        return (
+    return (
+        supported.current && (
             <div>
                 <label id="switch" className="switch">
-                    <input type="checkbox" onChange={this.toggle} id="slider" />
+                    <input type="checkbox" onChange={toggle} id="slider" checked={!active}/>
                     <span className="slider round"></span>
                 </label>
                 <style media={active ? 'screen' : 'none'}>
-                    {active ? this.css.trim() : this.css}
+                    {active ? css.trim() : css}
                 </style>
             </div>
         )
-    }
-}
+    );
+};
 
-ThemeSwitch.defaultProps = {
-    preserveRasters: true,
-    storeKey: 'ThemeSwitch'
-}
-
-export default ThemeSwitch
+export default ThemeSwitch;
