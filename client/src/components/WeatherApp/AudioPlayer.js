@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeHigh, faVolumeXmark } from "@fortawesome/free-solid-svg-icons";
 import { WeatherContext } from '../../context/WeatherContext';
 import Rain from '../../assets/Sounds/Rain.mp3';
-import Sun from '../../assets/Sounds/NotRain.mp3';
+import Sun from '../../assets/Sounds/Sunny.mp3';
 import Wind from '../../assets/Sounds/Wind.mp3';
 import Thunder from '../../assets/Sounds/Thunder.mp3';
+import Drizzle from '../../assets/Sounds/NotRain.mp3';
 
 const AudioPlayer = () => {
 
@@ -15,17 +16,17 @@ const AudioPlayer = () => {
 
         let Url;
 
+        // https://openweathermap.org/weather-conditions
         if (weather !== null && typeof weather !== 'undefined') {
             const Id = weather.weather[0].id;
-
             if (Id < 300) { Url = Thunder }
+            else if (Id < 400) { Url = Drizzle }
             else if (Id < 700) { Url = Rain }
             else if (Id < 800) { Url = Wind }
             else { Url = Sun }
             const audio = new Audio(Url);
             setAudio(audio);
         }
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [weather]);
 
